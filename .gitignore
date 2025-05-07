@@ -1,0 +1,6 @@
+# CMake cache
+.cache/
+
+# build directories
+out/
+build/
