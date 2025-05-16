@@ -1,8 +1,11 @@
-#include "DataStructures.h"
-#include "Sorting.h"
-
 #include <iostream>
 #include <cstdlib>
+
+#include "List.h"
+#include "Stack.h"
+#include "Queue.h"
+#include "Sorting.h"
+#include "BST.h"
 
 static constexpr unsigned short ARR_LENGTH = 10;
 static constexpr unsigned int MAX_VAL = 20; 
@@ -111,7 +114,59 @@ void sortingDemo(void) {
     }
 }
 
+void BSTDemo(void) {
+    BST<int> bst;
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(4);
+    bst.insert(7);
+    bst.insert(6);
+
+    std::cout << "Initial binary search tree:";
+    std::cout << "\nPre-Order:\t";
+    bst.preorder([](const int& value){ std::cout << value << " "; });
+    std::cout << "\nIn-Order:\t";
+    bst.inorder([](const int& value){ std::cout << value << " "; });
+    std::cout << "\nPost-Order:\t";
+    bst.postorder([](const int& value){ std::cout << value << " "; });
+    std::cout << "\nRow-Order:\t";
+    bst.roworder([](const int& value){ std::cout << value << " "; });
+
+    std::cout << "\n";
+
+    auto result = bst.search(5);
+    std::cout << "Searching for 5...\n";
+    if (result) { std::cout << "Search result: " << *result << "\n"; }
+    else { std::cout << "Search unsuccessful\n"; }
+
+    result = bst.search(10);
+    std::cout << "Searching for 10...\n";
+    if (result) { std::cout << "Search result: " << *result << "\n"; } 
+    else { std::cout << "Search unsuccessful\n"; }
+
+    bst.remove(5);
+    std::cout << "After removing 5:\n";
+    bst.inorder([](const int& value){ std::cout << value << " "; });
+    std::cout << "\n";
+
+    bst.remove(3);
+    std::cout << "After removing 3:\n";
+    bst.inorder([](const int& value){ std::cout << value << " "; });
+    std::cout << "\n";
+
+    result = bst.minimum();
+    std::cout << "Searching for min element...\n";
+    if(result) { std::cout << "Min element: " << *result << "\n"; }
+    else { std::cout << "The tree is empty\n"; }
+
+    result = bst.maximum();
+    std::cout << "Searching for max element...\n";
+    if(result) { std::cout << "Max element: " << *result << "\n"; }
+    else { std::cout << "The tree is empty\n"; }
+}
+
 int main(void) {
-    dataStructuresDemo();
-    sortingDemo();
+    //dataStructuresDemo();
+    //sortingDemo();
+    BSTDemo();
 }
